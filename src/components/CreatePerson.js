@@ -15,10 +15,8 @@ class CreatePerson extends Component {
     this.state = { persons: [] };
     this.createPerson = this.createPerson.bind(this);
     this.updatePerson = this.updatePerson.bind(this);
+    this.removePerson = this.removePerson.bind(this);
   }
-  // async componentDidMount() {
-
-  // }
   createPerson(newPerson) {
     this.setState((state) => ({
       persons: [...state.persons, newPerson],
@@ -33,6 +31,12 @@ class CreatePerson extends Component {
     });
     this.setState({ persons: updatedPersons });
   }
+  removePerson(id) {
+    let updatedPersons = this.state.persons.filter(
+      (person) => person.id !== id
+    );
+    this.setState({ persons: updatedPersons });
+  }
 
   render() {
     const { classes } = this.props;
@@ -42,6 +46,7 @@ class CreatePerson extends Component {
           id={person.id}
           name={person.name}
           editPerson={this.updatePerson}
+          removePerson={this.removePerson}
         />
       </ListItem>
     ));
